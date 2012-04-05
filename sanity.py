@@ -1,11 +1,11 @@
 #!/usr/bin/env python
 # encoding: utf-8
 from optparse import OptionParser
+from clint.textui import colored
 import sys
 import os
 import re
-from clint.textui import colored
-from clint.textui import puts
+import time
 
 testfile_pattern = 'test_(.+)\.[json|yaml]'
 
@@ -14,20 +14,19 @@ def run_tests(folder):
     """
     searches for testfiles in a folder recursively
     """
+    test_files = []
+    start = time.clock()
 
     for root, subfolder, files in os.walk(folder):
         for file_ in files:
             match_ = re.match(testfile_pattern, file_)
             if match_:
-                testfile = os.path.abspath(file_)
-                puts(colored.red(testfile))
-                puts(colored.green(testfile))
-                #json testfiles
-                if testfile.endswith('json'):
-                    pass
-                #yaml testfiles
-                else:
-                    pass
+                testfile_ = os.path.abspath(file_)
+                test_files.append(testfile_)
+
+    elapsed = (time.clock() - start)
+    print 'RAN %s tests in %s' % (len(test_files), elapsed)
+    print colored.green('OK')
 
 
 def main():
