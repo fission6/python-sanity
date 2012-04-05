@@ -9,13 +9,21 @@ testfile_pattern = 'test_(.+)\.[json|yaml]'
 
 
 def run_tests(folder):
-
+    """
+    searches for testfiles in a folder recursively
+    """
     for root, subfolder, files in os.walk(folder):
         for file_ in files:
             match_ = re.match(testfile_pattern, file_)
             if match_:
                 testfile = os.path.abspath(file_)
                 print testfile
+                #json testfiles
+                if testfile.endswith('json'):
+                    pass
+                #yaml testfiles
+                else:
+                    pass
 
 
 def main():
