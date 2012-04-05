@@ -27,6 +27,7 @@ def run_tests(folder):
     elapsed = (time.clock() - start)
     print 'RAN %s tests in %s' % (len(test_files), elapsed)
     print colored.green('OK')
+    #print colored.red('OK')
 
 
 def main():
